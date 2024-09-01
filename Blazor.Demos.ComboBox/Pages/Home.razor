@@ -1,0 +1,39 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<h1 class="title">ComboBox</h1>
+<ComboBox Items=Items TItem="ListOfElements"
+    DisplayProperty=DisplayValue
+    OnItemSelected=OnItemSelected_Click />
+<hr />
+@if (!string.IsNullOrEmpty(ShowSeleccion))
+{
+    <h3 class="subtitle">@ShowSeleccion</h3>
+    <button type="button" class="button is-danger" 
+    @onclick="() => ShowSeleccion = string.Empty">Clear</button>
+}
+
+@code{
+    List<ListOfElements> Items = [
+        new(1,"Barcelona"), 
+        new(2,"Madrid"), 
+        new(3,"Las Palmas de Gran Canaria"), 
+        new(4,"New York"), 
+        new(5,"Berlin")
+    ];
+
+    string ShowSeleccion;
+
+    void OnItemSelected_Click(ListOfElements item)
+    {
+        ShowSeleccion = $"El elemento seleccionado es [{item.Id}] {item.Name}";
+    }
+
+    string DisplayValue(ListOfElements item)
+    {
+        Console.WriteLine($"DisplayValue => {item.Name}");
+        return item.Name;
+    }
+
+}

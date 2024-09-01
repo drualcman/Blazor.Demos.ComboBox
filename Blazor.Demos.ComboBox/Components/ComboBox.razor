@@ -1,0 +1,24 @@
+﻿@typeparam TItem
+<div class="control has-icons-right" @onfocusout=HandleFocusOut>
+    <input type="text" class="input"
+        @bind=SearchText
+        @oninput=FilterItems
+        @onfocus=OpenDropdown
+        placeholder="Search..." />
+    <span class="icon is-right">
+        <i class="fa-solid fa-caret-down"></i>
+    </span> 
+    @if (IsOpen)
+    {
+        <div class="dropdown-content my-dropdown">
+            @foreach (var item in FilteredItems)
+            {
+                <span class="dropdown-item" @onmousedown="() => SelectedItem(item)">
+                    @GetDisplayValue(item)
+                </span>                
+            }
+        </div>        
+    }
+</div>
+
+
