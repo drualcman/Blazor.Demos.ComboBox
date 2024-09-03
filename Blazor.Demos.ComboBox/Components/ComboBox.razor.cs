@@ -30,7 +30,7 @@ public partial class ComboBox<TItem>
         {
             await LoadItemAsync();
         }
-        else if (_isInitialized && Items != _items)
+        else if (_isInitialized && Items is not null && Items != _items)
         {
             _items = Items;
             FilteredItems = _items?.ToList() ?? [];
